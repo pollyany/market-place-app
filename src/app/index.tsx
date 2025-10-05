@@ -1,10 +1,5 @@
-import { Text, View } from "react-native";
+import { Redirect } from "expo-router";
 
 export default function App() {
-  return (
-    <View>
-      <Text>Olá mundo!</Text>
-      <Text className="text-purple-base">Olá mundo!</Text>
-    </View>
-  );
+  return <Redirect href="/login" />;
 }
