@@ -1,26 +1,31 @@
-import { FC, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import { useRegisterViewModel } from "./useRegister.viewModel";
-import { AppInput } from "../../shared/components/AppInput";
+import { FC } from 'react'
+import { Controller } from 'react-hook-form'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { AppInput } from '../../shared/components/AppInput'
+import { useRegisterViewModel } from './useRegister.viewModel'
 
 export const RegisterView: FC<ReturnType<typeof useRegisterViewModel>> = ({
   onSubmit,
+  control,
 }) => {
-  const [email, setEmail] = useState("");
-
   return (
-    <View className="flex-1 items-center justify-center">
-      <AppInput
-        leftIcon="mail-outline"
-        label="E-mail"
-        value={email}
-        onChangeText={setEmail}
-        error="E-mail inválido"
+    <View className="flex-1 justify-center">
+      <Controller
+        control={control}
+        name="email"
+        render={({ field: { onChange, onBlur, value } }) => (
+          <AppInput
+            leftIcon="mail-outline"
+            label="E-mail"
+            onChangeText={onChange}
+            onBlur={onBlur}
+            value={value}
+          />
+        )}
       />
-      <AppInput leftIcon="lock-closed-outline" label="Senha" secureTextEntry />
       <TouchableOpacity onPress={onSubmit}>
         <Text>Registrar</Text>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
