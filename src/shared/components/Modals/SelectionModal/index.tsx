@@ -1,14 +1,14 @@
-import { Ionicons } from '@expo/vector-icons'
-import clsx from 'clsx'
-import { FC } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { colors } from '../../../../styles/colors'
-import { SelectionOption, SelectionVariant } from '../../../hooks/useAppModal'
+import { Ionicons } from "@expo/vector-icons";
+import clsx from "clsx";
+import { FC } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { colors } from "../../../../styles/colors";
+import { SelectionOption, SelectionVariant } from "../../../hooks/useAppModal";
 
 export interface SelectionModalProps {
-  title: string
-  message?: string
-  options: SelectionOption[]
+  title: string;
+  message?: string;
+  options: SelectionOption[];
 }
 
 export const SelectionModal: FC<SelectionModalProps> = ({
@@ -18,13 +18,13 @@ export const SelectionModal: FC<SelectionModalProps> = ({
 }) => {
   const getButtonClass = (variant: SelectionVariant) =>
     clsx(
-      'w-full py-3 px-4 rounded-lg items-center flex-row justify-center mb-2',
+      "w-full py-3 px-4 rounded-lg items-center flex-row justify-center mb-2",
       {
-        'bg-danger': variant === 'danger',
-        'bg-blue-dark': variant === 'secondary',
-        'bg-purple-base': variant === 'primary',
+        "bg-danger": variant === "danger",
+        "bg-blue-dark": variant === "secondary",
+        "bg-purple-base": variant === "primary",
       },
-    )
+    );
 
   return (
     <View className="bg-white rounded-xl shadow-2xl w-[85%] mx-auto max-w-sm p-6">
@@ -38,10 +38,11 @@ export const SelectionModal: FC<SelectionModalProps> = ({
       )}
 
       <View className="gap-3">
-        {options.map((option) => (
+        {options.map((option, index) => (
           <TouchableOpacity
-            className={getButtonClass(option.variant ?? 'primary')}
-            key={option.text}
+            key={`selection-item-${index}`}
+            className={getButtonClass(option.variant ?? "primary")}
+         
             onPress={option.onPress}
           >
             {option.icon && (
@@ -57,5 +58,5 @@ export const SelectionModal: FC<SelectionModalProps> = ({
         ))}
       </View>
     </View>
-  )
-}
+  );
+};
