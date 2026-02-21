@@ -1,42 +1,43 @@
-import { Ionicons } from '@expo/vector-icons'
-import { FC } from 'react'
+import { Ionicons } from "@expo/vector-icons";
+import { FC } from "react";
 import {
   ActivityIndicator,
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
-} from 'react-native'
-import { colors } from '../../../styles/colors'
-import { ButtonVariants, buttonVariants } from './button.variants'
+} from "react-native";
+import { colors } from "../../../styles/colors";
+import { ButtonVariants, buttonVariants } from "./button.variants";
 
 interface AppButtonProps extends TouchableOpacityProps, ButtonVariants {
-  leftIcon?: keyof typeof Ionicons.glyphMap
-  rightIcon?: keyof typeof Ionicons.glyphMap
-  children: string
+  leftIcon?: keyof typeof Ionicons.glyphMap;
+  rightIcon?: keyof typeof Ionicons.glyphMap;
+  children: string;
 }
 
 export const AppButton: FC<AppButtonProps> = ({
   leftIcon,
   rightIcon,
   children,
-  variant = 'filled',
+  variant = "filled",
   isLoading,
   isDisabled,
+  className,
   ...rest
 }) => {
   const contentColor =
-    variant === 'filled' ? colors.white : colors['purple-base']
+    variant === "filled" ? colors.white : colors["purple-base"];
 
   const styles = buttonVariants({
     hasIcon: !!leftIcon || !!rightIcon,
     isLoading,
     isDisabled,
     variant,
-  })
+  });
 
   const renderContent = () => {
     if (isLoading) {
-      return <ActivityIndicator size="small" color={contentColor} />
+      return <ActivityIndicator size="small" color={contentColor} />;
     }
 
     return (
@@ -47,12 +48,12 @@ export const AppButton: FC<AppButtonProps> = ({
           <Ionicons name={rightIcon} color={contentColor} size={20} />
         )}
       </>
-    )
-  }
+    );
+  };
 
   return (
-    <TouchableOpacity className={styles.base()} {...rest}>
+    <TouchableOpacity className={styles.base({ className })} {...rest}>
       {renderContent()}
     </TouchableOpacity>
-  )
-}
+  );
+};
