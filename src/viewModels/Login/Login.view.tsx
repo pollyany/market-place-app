@@ -5,6 +5,7 @@ import { AppInputController } from "../../shared/components/AppInputController";
 import { AuthFormHeader } from "../../shared/components/AuthFormHeader";
 import { KeyboardContainer } from "../../shared/components/KeyboardContainer";
 import { useLoginViewModel } from "./useLogin.viewModel";
+import { AppButton } from "../../shared/components/AppButton";
 
 export const LoginView: FC<ReturnType<typeof useLoginViewModel>> = ({
   control,
@@ -42,6 +43,13 @@ export const LoginView: FC<ReturnType<typeof useLoginViewModel>> = ({
         <TouchableOpacity onPress={() => router.push("/register")}>
           <Text>Registro</Text>
         </TouchableOpacity>
+        <AppButton
+          variant="outlined"
+          rightIcon="arrow-forward"
+          onPress={() => alert("TESTE")}
+        >
+          Teste
+        </AppButton>
       </View>
     </KeyboardContainer>
   );
