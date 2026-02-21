@@ -16,7 +16,7 @@ interface ModalStore {
 }
 
 export const useModalStore = create<ModalStore>((set, get) => ({
-  isOpen: false,
+  isOpen: true,
   content: null,
   config: {
     animationType: 'fade',
