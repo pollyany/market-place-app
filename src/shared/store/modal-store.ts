@@ -11,20 +11,21 @@ interface ModalStore {
   isOpen: boolean
   content: ReactNode | null
   config: ModalConfig
-open: (content: ReactNode, config?: ModalConfig) => void
+  open: (content: ReactNode, config?: ModalConfig) => void
   close: () => void
 }
 
 export const useModalStore = create<ModalStore>((set, get) => ({
-  isOpen: true,
+  isOpen: false,
   content: null,
   config: {
     animationType: 'fade',
     transparent: true,
     statusBarTranslucent: false,
   },
-  open: (content, config) =>
+  open: (content: ReactNode, config?: ModalConfig) =>
     set({
+      isOpen: true,
       content,
       config: {
         ...get().config,
