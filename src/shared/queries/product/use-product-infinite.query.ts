@@ -1,8 +1,15 @@
-import { useInfiniteQuery } from "@tanstack/react-query";
-import { buildImageUrl } from "../../helpers/buildImageUrl";
-import { getProducts } from "../../services/product.service";
+import { useInfiniteQuery } from '@tanstack/react-query'
+import { buildImageUrl } from '../../helpers/buildImageUrl'
+import { getProducts } from '../../services/product.service'
+import { FilterState } from '../../store/use-filter-store'
 
-export const useProductInfiniteQuery = () => {
+interface ProductsInfinityQueryParams {
+  filters?: FilterState
+}
+
+export const useProductInfiniteQuery = ({
+  filters,
+}: ProductsInfinityQueryParams) => {
   const {
     data,
     error,
@@ -20,29 +27,33 @@ export const useProductInfiniteQuery = () => {
             page: pageParam,
             perPage: 10,
           },
-        });
+          filters: {
+            categoryIds: filters?.selectedCategories ?? [],
+            maxValue: filters?.valueMax ?? undefined,
+            minValue: filters?.valueMin ?? undefined,
+            searchText: filters?.searchText ?? undefined,
+          },
+        })
 
-        return response;
+        return response
       } catch (error) {
-        throw error;
+        throw error
       }
     },
     getNextPageParam: (lastPage) => {
-      return lastPage.page < lastPage.totalPages
-        ? lastPage.page + 1
-        : undefined;
+      return lastPage.page < lastPage.totalPages ? lastPage.page + 1 : undefined
     },
     initialPageParam: 1,
-    queryKey: ["products"],
-    staleTime: 1000 * 60 * 1,
-  });
+    queryKey: ['products', filters],
+    staleTime: 1000 * 60 * 1, // 1 minuto
+  })
 
   const products = data?.pages
     .flatMap((page) => page.data)
     .map((product) => ({
       ...product,
       imageUrl: buildImageUrl(product.photo),
-    }));
+    }))
 
   return {
     products,
@@ -53,5 +64,5 @@ export const useProductInfiniteQuery = () => {
     isLoading,
     refetch,
     isRefetching,
-  };
-};
+  }
+}
