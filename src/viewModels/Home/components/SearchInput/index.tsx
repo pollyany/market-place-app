@@ -1,7 +1,7 @@
-import { Ionicons } from '@expo/vector-icons'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { AppInput } from '../../../../shared/components/AppInput'
-import { colors } from '../../../../styles/colors'
+import { Ionicons } from "@expo/vector-icons";
+import { Text, TouchableOpacity, View } from "react-native";
+import { AppInput } from "../../../../shared/components/AppInput";
+import { colors } from "../../../../styles/colors";
 
 export const SearchInput = () => {
   return (
@@ -16,14 +16,14 @@ export const SearchInput = () => {
           />
         </View>
 
-        <TouchableOpacity className="ml-5 mt-6 items-center justify-center rounded-lg border h-[48px] w-[48px] border-purple-base">
+        <TouchableOpacity className="ml-5 mt-6 items-center justify-center rounded-lg border size-[48px] border-purple-base">
           <Ionicons
             name="filter-outline"
             size={24}
-            color={colors['purple-base']}
+            color={colors["purple-base"]}
           />
         </TouchableOpacity>
       </View>
     </View>
-  )
-}
+  );
+};
