@@ -1,6 +1,8 @@
 import { useGetProductCategoriesQuery } from '../../../../shared/queries/product/use-get-product-categories'
 import { useBottomSheetStore } from '../../../../shared/store/bottomsheet-store'
 import { useFilterStore } from '../../../../shared/store/use-filter-store'
+import { useState } from 'react'
+import { useDebounce } from '../../../../shared/hooks/useDebounce'
 
 export const useFilterViewModel = () => {
   const { data: productCategories, isLoading } = useGetProductCategoriesQuery()
