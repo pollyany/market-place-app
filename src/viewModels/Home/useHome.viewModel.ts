@@ -1,4 +1,4 @@
-import { useProductInfiniteQuery } from '../../shared/queries/product/use-product-infinite.query'
+import { useProductInfiniteQuery } from "../../shared/queries/product/use-product-infinite.query";
 
 export const useHomeViewModel = () => {
   const {
@@ -10,24 +10,29 @@ export const useHomeViewModel = () => {
     isLoading,
     refetch,
     isRefetching,
-  } = useProductInfiniteQuery()
+  } = useProductInfiniteQuery();
 
   const handleLoadMore = () => {
     if (hasNextPage && !isFetchingNextPage && !isLoading) {
-      fetchNextPage()
+      fetchNextPage();
     }
-  }
+  };
 
   const handleRefresh = async () => {
-    await refetch()
-  }
+    await refetch();
+  };
 
-  console.log('Data:', JSON.stringify(products, null, 2))
-  console.log('Error:', error)
-  console.log('Is Loading:', isLoading)
+  const handleEndReached = () => {
+    handleLoadMore();
+  };
+
   return {
     handleLoadMore,
     handleRefresh,
     products,
-  }
-}
+    handleEndReached,
+    isLoading,
+    hasNextPage,
+    isFetchingNextPage,
+  };
+};
