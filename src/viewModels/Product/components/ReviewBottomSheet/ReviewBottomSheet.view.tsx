@@ -5,6 +5,7 @@ import { AppButton } from '../../../../shared/components/AppButton'
 import { AppInput } from '../../../../shared/components/AppInput'
 import { colors } from '../../../../styles/colors'
 import { useReviewBottomSheetViewModel } from './useReviewBottomSheet.viewModel'
+import { Stars } from './components/Stars'
 
 export const ReviewBottomSheetView: FC<
   ReturnType<typeof useReviewBottomSheetViewModel>
@@ -21,11 +22,7 @@ export const ReviewBottomSheetView: FC<
       <View className="p-6">
         <Text className="font-semibold text-base text-gray-300">Nota</Text>
         <View className="flex-row items-center mb-6 gap-2">
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
-          <Ionicons name="star-outline" size={32} />
+          <Stars rating={3} />
         </View>
 
         <AppInput
