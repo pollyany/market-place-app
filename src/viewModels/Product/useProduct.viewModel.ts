@@ -1,12 +1,12 @@
-import { useGetProductCommentsInfiniteQuery } from '../../shared/queries/product/use-get-product-comments-infinite-query'
-import { useGetProductDetails } from '../../shared/queries/product/use-get-product-details'
+import { useGetProductCommentsInfiniteQuery } from "../../shared/queries/product/use-get-product-comments-infinite-query";
+import { useGetProductDetails } from "../../shared/queries/product/use-get-product-details";
 
 export const useProductViewModel = (productId: number) => {
   const {
     data: productDetails,
     isLoading,
     error,
-  } = useGetProductDetails(productId)
+  } = useGetProductDetails(productId);
 
   const {
     comments,
@@ -17,23 +17,23 @@ export const useProductViewModel = (productId: number) => {
     error: errorComments,
     isRefetching,
     isFetchingNextPage,
-  } = useGetProductCommentsInfiniteQuery(productId)
+  } = useGetProductCommentsInfiniteQuery(productId);
 
   const handleLoadMore = () => {
     if (hasNextPage && !isFetchingNextPage) {
-      fetchNextPage()
+      fetchNextPage();
     }
-  }
+  };
 
   const handleRefetch = () => {
     if (!isRefetching) {
-      refetch()
+      refetch();
     }
-  }
+  };
 
   const handleEndReached = () => {
-    handleLoadMore()
-  }
+    handleLoadMore();
+  };
 
   return {
     isLoading,
@@ -45,5 +45,7 @@ export const useProductViewModel = (productId: number) => {
     isLoadingComments,
     errorComments,
     comments,
-  }
-}
+    isRefetching,
+    isFetchingNextPage,
+  };
+};
