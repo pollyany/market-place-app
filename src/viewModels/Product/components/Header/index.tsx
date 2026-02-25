@@ -1,17 +1,21 @@
-import { Ionicons } from '@expo/vector-icons'
-import { router } from 'expo-router'
-import { FC } from 'react'
-import { Image, Text, TouchableOpacity, View } from 'react-native'
-import { AppPriceText } from '../../../../shared/components/AppPriceText'
-import { buildImageUrl } from '../../../../shared/helpers/buildImageUrl'
-import { GetProductDetailsInterface } from '../../../../shared/interfaces/http/product-detail'
-import { colors } from '../../../../styles/colors'
+import { Ionicons } from "@expo/vector-icons";
+import { router } from "expo-router";
+import { FC } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import { AppPriceText } from "../../../../shared/components/AppPriceText";
+import { buildImageUrl } from "../../../../shared/helpers/buildImageUrl";
+import { GetProductDetailsInterface } from "../../../../shared/interfaces/http/product-detail";
+import { colors } from "../../../../styles/colors";
 
 interface HeaderParams {
-  productDetails: GetProductDetailsInterface
+  productDetails: GetProductDetailsInterface;
+  onOpenReviewBottomSheet: () => void;
 }
 
-export const Header: FC<HeaderParams> = ({ productDetails }) => {
+export const Header: FC<HeaderParams> = ({
+  productDetails,
+  onOpenReviewBottomSheet,
+}) => {
   return (
     <>
       <View className="pb-5 items-start">
@@ -19,7 +23,7 @@ export const Header: FC<HeaderParams> = ({ productDetails }) => {
           onPress={router.back}
           className="w-full justify-start flex-row items-center gap-3"
         >
-          <Ionicons name="arrow-back" size={24} color={colors['purple-base']} />
+          <Ionicons name="arrow-back" size={24} color={colors["purple-base"]} />
           <Text className="text-base font-bold text-purple-base">Voltar</Text>
         </TouchableOpacity>
       </View>
@@ -31,7 +35,7 @@ export const Header: FC<HeaderParams> = ({ productDetails }) => {
           className="w-full rounded-lg h-[192px]"
         />
         <View className="items-center absolute top-0 right-0 flex-row bg-blue-light px-2 py-1 rounded-bl-lg rounded-tr-lg">
-          <Ionicons name="star" size={16} color={colors['blue-base']} />
+          <Ionicons name="star" size={16} color={colors["blue-base"]} />
           <Text className="text-sm font-semibold ml-1 text-gray-800">
             {productDetails.averageRating.toFixed(1)}
           </Text>
@@ -74,13 +78,13 @@ export const Header: FC<HeaderParams> = ({ productDetails }) => {
           <View className="mb-4">
             {productDetails.width && (
               <Text className="text-base text-gray-500 mb-1">
-                <Text className="text-gray-800">Largura:</Text>{' '}
+                <Text className="text-gray-800">Largura:</Text>{" "}
                 {productDetails.width}
               </Text>
             )}
             {productDetails.height && (
               <Text className="text-base text-gray-500 mb-1">
-                <Text className="text-gray-800">Altura:</Text>{' '}
+                <Text className="text-gray-800">Altura:</Text>{" "}
                 {productDetails.height}
               </Text>
             )}
@@ -97,7 +101,7 @@ export const Header: FC<HeaderParams> = ({ productDetails }) => {
         <View className="flex-row items-center justify-between pt-4 border-t border-gray-200">
           <Text className="text-base font-bold text-gray-800">Avaliações</Text>
 
-          <TouchableOpacity>
+          <TouchableOpacity onPress={onOpenReviewBottomSheet}>
             <Text className="text-purple-base text-base font-medium">
               Avaliar
             </Text>
@@ -105,5 +109,5 @@ export const Header: FC<HeaderParams> = ({ productDetails }) => {
         </View>
       </View>
     </>
-  )
-}
+  );
+};
