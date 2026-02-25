@@ -1,24 +1,28 @@
-import { Ionicons } from '@expo/vector-icons'
-import { FC } from 'react'
-import { TouchableOpacity } from 'react-native'
-import { colors } from '../../../../../../styles/colors'
+import { Ionicons } from "@expo/vector-icons";
+import { FC } from "react";
+import { TouchableOpacity } from "react-native";
+import { colors } from "../../../../../../styles/colors";
 
 interface StarsParams {
-  rating: number
+  rating: number;
+  onChangeRating: (rating: number) => void;
 }
 
-export const Stars: FC<StarsParams> = ({ rating }) => {
+export const Stars: FC<StarsParams> = ({ rating, onChangeRating }) => {
   return Array.from({ length: 5 }, (_, index) => {
-    const starNumber = index + 1
-    const isSelected = starNumber <= rating
+    const starNumber = index + 1;
+    const isSelected = starNumber <= rating;
     return (
-      <TouchableOpacity key={`star-${index}`} onPress={() => {}}>
+      <TouchableOpacity
+        key={`star-${index}`}
+        onPress={() => onChangeRating(starNumber)}
+      >
         <Ionicons
-          name={isSelected ? 'star' : 'star-outline'}
+          name={isSelected ? "star" : "star-outline"}
           size={32}
-          color={isSelected ? colors['purple-base'] : colors.gray[200]}
+          color={isSelected ? colors["purple-base"] : colors.gray[200]}
         />
       </TouchableOpacity>
-    )
-  })
-}
+    );
+  });
+};
