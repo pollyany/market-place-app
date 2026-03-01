@@ -4,20 +4,27 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { CartHeader } from './components/CartHeader'
 import { EmptyList } from './components/EmptyList'
 import { ProductCartCard } from './components/ProductCartCard'
+import { CartFooter } from './components/CartFooter'
 import { useCartViewModel } from './useCart.viewModel'
 
 export const CartView: FC<ReturnType<typeof useCartViewModel>> = ({
   products,
+  openCartBottomSheet,
 }) => {
   return (
     <SafeAreaView>
       <FlatList
         contentContainerClassName="px-6"
-        data={[]}
+        data={products}
         renderItem={({ item }) => <ProductCartCard product={item} />}
         keyExtractor={({ id }) => `product-cart-id-${id}`}
         ListEmptyComponent={<EmptyList />}
         ListHeaderComponent={<CartHeader />}
+        ListFooterComponent={
+          products.length > 0 ? (
+            <CartFooter openCartBottomSheet={openCartBottomSheet} />
+          ) : undefined
+        }
       />
     </SafeAreaView>
   )
