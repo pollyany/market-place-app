@@ -3,7 +3,6 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { FC } from 'react'
 import { Text, View } from 'react-native'
 import Animated from 'react-native-reanimated'
-import { colors } from '../../../../../../styles/colors'
 import { FocusedField } from '../../useAddCardBottomSheet.viewModel'
 import { useCreditCardViewModel } from './useCreditCard.viewModel'
 
@@ -17,11 +16,12 @@ export const CreditCardView: FC<
   ReturnType<typeof useCreditCardViewModel> & {
     focusedField: FocusedField | null
   }
-> = ({ focusedField }) => {
+> = ({ focusedField, frontAnimatedStyle, backAnimatedStyle }) => {
   return (
     <View className="h-[192px]">
       <Animated.View
         style={[
+          frontAnimatedStyle,
           {
             position: 'absolute',
             width: '100%',
@@ -78,6 +78,7 @@ export const CreditCardView: FC<
       </Animated.View>
       <Animated.View
         style={[
+          backAnimatedStyle,
           {
             position: 'absolute',
             width: '100%',
