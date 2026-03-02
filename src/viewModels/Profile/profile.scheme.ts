@@ -5,7 +5,7 @@ export const profileScheme: yup.ObjectSchema<{
   email: string
   phone: string
   newPassword?: string
-  confirmNewPassword?: string
+  password?: string
 }> = yup.object({
   name: yup
     .string()
@@ -17,7 +17,7 @@ export const profileScheme: yup.ObjectSchema<{
     .required('Telefone é obrigatório')
     .matches(/^\d{11}$/, 'Telefone deve ter 11 dígitos (DDD + número)'),
   newPassword: yup.string().optional(),
-  confirmNewPassword: yup.string().optional(),
+  password: yup.string().optional(),
 })
 
 export type ProfileFormData = yup.InferType<typeof profileScheme>
