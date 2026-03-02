@@ -3,7 +3,9 @@ import { LinearGradient } from 'expo-linear-gradient'
 import { FC } from 'react'
 import { Text, View } from 'react-native'
 import Animated from 'react-native-reanimated'
+import { colors } from '../../../../../../styles/colors'
 import { FocusedField } from '../../useAddCardBottomSheet.viewModel'
+import { CardData } from '.'
 import { useCreditCardViewModel } from './useCreditCard.viewModel'
 
 const PURPLE_GRADIENT: readonly [string, string, string] = [
@@ -15,8 +17,14 @@ const PURPLE_GRADIENT: readonly [string, string, string] = [
 export const CreditCardView: FC<
   ReturnType<typeof useCreditCardViewModel> & {
     focusedField: FocusedField | null
-  }
-> = ({ focusedField, frontAnimatedStyle, backAnimatedStyle }) => {
+  } & { cardData: CardData }
+> = ({
+  focusedField,
+  frontAnimatedStyle,
+  backAnimatedStyle,
+  cardData,
+  formatCardNumber,
+}) => {
   return (
     <View className="h-[192px]">
       <Animated.View
@@ -45,7 +53,7 @@ export const CreditCardView: FC<
             })}
           >
             <Text className="text-white text-lg tracking-widest text-center">
-              123
+              {formatCardNumber(cardData.number)}
             </Text>
           </View>
 
@@ -59,7 +67,7 @@ export const CreditCardView: FC<
                 PORTADOR
               </Text>
               <Text className="text-white text-sm font-bold uppercase">
-                NOME DO TITULAR
+                {cardData.name.length > 0 ? cardData.name : 'NOME DO TITULAR'}
               </Text>
             </View>
 
@@ -71,7 +79,9 @@ export const CreditCardView: FC<
               <Text className="text-white text-xs mb-1 font-semibold">
                 VÁLIDO ATÉ
               </Text>
-              <Text className="text-white text-sm font-bold">"MM/AA"</Text>
+              <Text className="text-white text-sm font-bold">
+                {cardData.expiry.length > 0 ? cardData.expiry : 'MM/AA'}
+              </Text>
             </View>
           </View>
         </LinearGradient>
@@ -102,7 +112,7 @@ export const CreditCardView: FC<
                   'bg-blue-100': focusedField === 'cvv',
                 })}
               >
-                <Text>...</Text>
+                <Text>{cardData.cvv || '...'}</Text>
               </View>
             </View>
           </View>
