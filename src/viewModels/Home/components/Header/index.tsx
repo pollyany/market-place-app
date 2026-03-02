@@ -1,15 +1,18 @@
-import { Ionicons } from "@expo/vector-icons";
-import { Image, Text, TouchableOpacity, View } from "react-native";
-import { useUserStore } from "../../../../shared/store/user-store";
-import { colors } from "../../../../styles/colors";
-
+import { Ionicons } from '@expo/vector-icons'
+import { router } from 'expo-router'
+import { Image, Text, TouchableOpacity, View } from 'react-native'
+import { useUserStore } from '../../../../shared/store/user-store'
+import { colors } from '../../../../styles/colors'
 
 export const HomeHeader = () => {
-  const { user } = useUserStore();
+  const { user } = useUserStore()
 
   return (
     <View>
-      <TouchableOpacity className="flex-row items-center gap-6">
+      <TouchableOpacity
+        onPress={() => router.push('/(private)/profile')}
+        className="flex-row items-center gap-6"
+      >
         <View className="relative">
           {user?.avatarUrl ? (
             <Image
@@ -32,11 +35,11 @@ export const HomeHeader = () => {
             <Ionicons
               name="arrow-forward"
               size={20}
-              color={colors["purple-base"]}
+              color={colors['purple-base']}
             />
           </View>
         </View>
       </TouchableOpacity>
     </View>
-  );
-};
+  )
+}
