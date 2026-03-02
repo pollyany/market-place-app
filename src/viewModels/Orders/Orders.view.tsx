@@ -3,6 +3,7 @@ import { FlatList, Text, View } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { OrderItem } from './components/OrderItem'
 import { useOrdersViewModel } from './useOrders.viewModel'
+import { EmptyList } from './components/EmptyList'
 
 export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
   orders,
@@ -14,6 +15,7 @@ export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
         data={orders}
         renderItem={({ item: order }) => <OrderItem order={order} />}
         keyExtractor={({ id }) => `order-${id}`}
+        ListEmptyComponent={<EmptyList />}
       />
     </SafeAreaView>
   )
