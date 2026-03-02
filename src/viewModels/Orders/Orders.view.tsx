@@ -5,10 +5,17 @@ import { OrderItem } from './components/OrderItem'
 import { useOrdersViewModel } from './useOrders.viewModel'
 import { EmptyList } from './components/EmptyList'
 import { ListHeader } from './components/ListHeader'
+import { OrdersError } from './components/OrdersError'
+import { OrdersLoading } from './components/OrdersLoading'
 
 export const OrdersView: FC<ReturnType<typeof useOrdersViewModel>> = ({
-  orders,
+  orders, 
+  error,
+  isLoading,
 }) => {
+   if (isLoading) return <OrdersLoading />
+
+  if (error) return <OrdersError />
   return (
     <SafeAreaView edges={['top']} className="flex-1">
       <FlatList
