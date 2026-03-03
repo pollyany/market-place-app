@@ -3,15 +3,16 @@ import { CameraType } from 'expo-image-picker'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useImage } from '../../shared/hooks/useImage'
+import { useOneSignal } from '../../shared/hooks/useOneSignal'
 import { useRegisterMutation } from '../../shared/queries/auth/use-register.mutation'
-
+import { useUploadAvatarMutation } from '../../shared/queries/auth/use-upload-avatar.mutation'
 import { useUserStore } from '../../shared/store/user-store'
 import { RegisterFormData, registerScheme } from './register.scheme'
-import { useUploadAvatarMutation } from '../../shared/queries/auth/use-upload-avatar.mutation'
 
 export const useRegisterViewModel = () => {
   const { updateUser } = useUserStore()
   const [avatarUri, setAvatarUri] = useState<string | null>(null)
+  const { playerId } = useOneSignal()
 
   const { handleSelectImage } = useImage({
     callback: setAvatarUri,
@@ -43,7 +44,6 @@ export const useRegisterViewModel = () => {
     onSuccess: async () => {
       if (avatarUri) {
         const { url } = await uploadAvatarMutation.mutateAsync(avatarUri)
- 
 
         updateUser({ avatarUrl: url })
       }
@@ -51,10 +51,12 @@ export const useRegisterViewModel = () => {
   })
 
   const onSubmit = handleSubmit(async (userData) => {
-
     const { confirmPassword, ...registerData } = userData
 
-    await userRegisterMutation.mutateAsync(registerData)
+    await userRegisterMutation.mutateAsync({
+      ...registerData,
+      notificationToken: playerId,
+    })
   })
 
   return {
