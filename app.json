@@ -1,6 +1,7 @@
 {
   "expo": {
-    "name": "market-place-app","scheme": "marketplace",
+    "name": "market-place-app",
+    "scheme": "marketplace",
     "slug": "market-place-app",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -26,8 +27,13 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.CAMERA",
         "android.permission.RECORD_AUDIO"
-      ]
+      ],
+      "package": "com.pollyany.marketplaceapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -42,7 +48,7 @@
           "cameraPermission": "Este app precisa acessar sua câmera para que você possa tirar fotos para o seu perfil."
         }
       ],
-       [
+      [
         "expo-notifications",
         {
           "icon": "./assets/icon.png",
@@ -50,7 +56,8 @@
           "defaultChannel": "default",
           "enableBackgroundRemoteNotifications": false
         }
-      ]
+      ],
+      ["onesignal-expo-plugin", {"mode": "development"}]
     ]
   }
 }

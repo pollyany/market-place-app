@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "653575464183",
+    "project_id": "market-place-push-notifi-cfd76",
+    "storage_bucket": "market-place-push-notifi-cfd76.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:653575464183:android:62cd61c357c1b1f51e5ff2",
+        "android_client_info": {
+          "package_name": "com.pollyany.marketplaceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQa79gipBeZiodG1xWCgP1e1502PBjXo0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
